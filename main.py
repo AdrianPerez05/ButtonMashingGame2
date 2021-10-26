@@ -40,36 +40,3 @@ while True:
         high_score = fin_time
 
 
-def twilio():
-    print("line 44")
-
-def txt(Message, PhoneNumber):
-    account_sid = 'ACefa8cf472e13295a5a5e21c7949efde2'
-    auth_token = '20a56cceee22e13c4e9b0da6345cf8d3'
-    client = Client(account_sid, auth_token)
-
-    message = client.messages.create(
-        messaging_service_sid='MGe5012db9fd7766cc8faa28e5e2e03266',
-        body="Test2",
-        to="+7135577076"
-    )
-
-    print(message.sid)
-
-
-# txt("My Test Message",'+7135577076')
-
-def text2():
-    account_sid = 'ACefa8cf472e13295a5a5e21c7949efde2'
-    auth_token = '20a56cceee22e13c4e9b0da6345cf8d3'
-    client = Client(account_sid, auth_token)
-
-    message = client.messages.create(
-        messaging_service_sid='MGe5012db9fd7766cc8faa28e5e2e03266',
-        body='Test3',
-        to='+17135577076'
-    )
-
-    print(message.sid)
-
-
