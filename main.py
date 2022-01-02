@@ -1,55 +1,81 @@
-import time
-import getch
-from tkinter import *
+#import time
+#import getch
+#import twilio later
+#import cvs utlity (cvs)
 import pygame
+import csv
 
-def gamefun():
-    high_score = 0
-    istancde = 0
-    name = "Button Mashing Race"
-    while True:
-        distance = int(0)
-        print('\n--------------------------------------------------------------')
-        print('\n\nWelcome to the 100m sprint, tap z and x rapidly to move!')
-        print('* = 10m')
-        print('\nCurrent record:' + str(high_score) + ' by: ' + name)
-        print('\nPress enter to start')
-        input()
-        print('Ready...')
-        time.sleep(1)
-        print('GO!')
-        start_time = time.time()
 
-        import pygame
-        x = 0
-        z = 0
-        pygame.init()
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_x:
-                        x += 1
-                    if event.key == pygame.K_z:
-                        z += 1
-            print(x, "   vs    ", z)
+pygame.init()
+#set screen size
+X = 800
+Y = 100
 
-            timeout = 5
+bored = pygame.display.set_mode((X,Y))
+# Initializing Pygame
+pygame.init()
 
-        t = Timer(timeout, print, ['Sorry, times up'])
-        t.start()
-        prompt = "You have %d seconds to choose the correct answer...\n" % timeout
-        answer = input(prompt)
+# Initializing surface
+surface = pygame.display.set_mode((400, 300))
 
-        t.cancel()
+# Initialing RGB Color
+color = (255, 0, 0)
 
-        fin_time = time.time() - start_time
-        fin_time = round(fin_time, 2)
+# Changing surface color
+surface.fill(color)
+pygame.display.flip()
+#this is the colors for the players
+color_player1 = (0,100,0)
+color_player2 = (0,0,255)
+#these are the player rectangles
+#player 1
+pygame.draw.rect(bored,color_player1,pygame.Rect(0,10,20,20))
+pygame.draw.rect(bored,color_player2,pygame.Rect(0,30,20,20))
 
-        print('Congratulations on successfully completing the race!')
-        print('You took', fin_time, 'seconds to reach the finish line')
 
-        if fin_time < high_score:
-            print("Well done you've got a new high score ")
-            name = input("Please enter your name : ")
-            high_score = fin_time
-gamefun()
+
+
+def endgame():
+    print("endgame")
+
+def gamerun():
+    q = 0
+    p = 0
+    running = True
+    while running == True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    q += 1
+                if event.key == pygame.K_p:
+                    p += 1
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    exit()
+                #if q == 20:
+                    #print("endgame")
+                if p == 20:
+                    print("p has won")
+                if q == 20:
+                    print("q has won")
+                    pygame.quit()
+            pygame.draw.rect(bored, color_player1, pygame.Rect(0, 10, 20*q, 20))
+            pygame.draw.rect(bored, color_player2, pygame.Rect(0, 30, 20*p, 20))
+            print(q,p)
+
+        pygame.display.flip()
+gamerun()
+
+#data_list = [["Name", "Email"],
+            #[1, "Asher", "asherforman@stu.postoakschool.org"],
+            #[2, "Leila", "leilamarks@stu.postoakschool.org"],
+            #[3, "Connor", "connorkissack@stu.postoakschool.org"]
+            #[3, "Juan", "juancarlos@stu.postoakschool.org"]
+           # [3, "Henry", "henryquillin@stu.postoakschool.org"]
+
+
+   # with open('csv file', 'w', newline='') as file:
+  #  writer = csv.writer(file, delimiter='|')
+  #  writer.writerows(data_list)
+
+
